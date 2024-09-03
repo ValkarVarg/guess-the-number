@@ -1,0 +1,28 @@
+{
+    "colorize.languages": [
+        "js",
+        "ts",
+        "jsx",
+        "tsx",
+        "css",
+        "sass",
+        "scss",
+        "less",
+        "postcss",
+        "sss",
+        "stylus",
+        "xml",
+        "svg"
+    ],
+    "colorize.include": [
+        "**/*.css",
+        "**/*.scss",
+        "**/*.sass",
+        "**/*.less",
+        "**/*.styl",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.js",
+        "**/*.jsx"
+    ]
+}
