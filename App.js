@@ -8,14 +8,13 @@ import Colors from "./constants/colors";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
-// Prevent the splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
   const [gameOver, setGameOver] = useState(false);
+  const [roundNumber, setRoundNumber] = useState(0)
   
-  // Load the fonts
   const [fontsLoaded] = useFonts({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
@@ -24,7 +23,6 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       if (fontsLoaded) {
-        // Hide the splash screen after the fonts are loaded
         await SplashScreen.hideAsync();
       }
     }
@@ -40,9 +38,16 @@ export default function App() {
     setGameOver(false);
   }
 
-  function gameOverHandler() {
+  function gameOverHandler(gameRoundNumber) {
     setGameOver(true);
+    setRoundNumber(gameRoundNumber)
   } 
+
+  function startNewGameHandler() {
+    setUserNumber(null)
+    setRoundNumber(0)
+    setGameOver(false)
+  }
 
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
 
@@ -51,7 +56,7 @@ export default function App() {
   }
 
   if (gameOver) {
-    screen = <GameOverScreen />;
+    screen = <GameOverScreen userNumber={userNumber} roundNumber={roundNumber} onStartNewGame={startNewGameHandler}/>;
   }
 
   return (
